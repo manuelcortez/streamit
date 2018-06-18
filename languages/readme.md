@@ -1,0 +1,1 @@
+Here language files should be placed.
