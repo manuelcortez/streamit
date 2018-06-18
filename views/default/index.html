@@ -1,0 +1,31 @@
+{{extend 'layout.html'}}
+
+{{block header}}
+    <header class="container-fluid background">
+      <div class="jumbotron text-center">
+      </div>
+    </header>
+
+{{end}}
+{{if auth.user:}}
+{{if len(recent_shows) > 0:}}
+{{=H2(T("Continue watching"))}}
+<ul>
+{{for i in xrange(0, len(recent_shows)):}}
+<li>{{=A("{0} {1}X{2}: {3}".format(recent_shows[i].show_title, recent_episodes[i].season_number.season_number, recent_episodes[i].episode_number, recent_episodes[i].name), _href=URL("default", "watch", vars=dict(type="tv", id=recent_episodes[i].id)))}}</li>
+{{pass}}
+</ul>
+{{pass}}
+{{=H2(T("TV Shows"))}}
+<ul>
+{{for i in tv_shows:}}
+{{=LI(A(i.show_title, _href=URL("default", "show", vars=dict(show=i.id))))}}
+{{pass}}
+</ul>
+{{=H2(T("Movies"))}}
+<ul>
+{{for i in movies:}}
+{{=LI(A(i.title, _href=URL("default", "movie", vars=dict(movie=i.id))))}}
+{{pass}}
+</ul>
+{{pass}}

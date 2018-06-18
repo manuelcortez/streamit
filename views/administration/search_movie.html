@@ -1,0 +1,18 @@
+{{extend 'layout.html'}}
+
+{{block header}}
+    <header class="container-fluid background">
+      <div class="jumbotron text-center">
+      </div>
+    </header>
+
+{{end}}
+{{=form}}
+{{if len(results) != 0:}}
+{{=H2(T("Search results"))}}
+<ul>
+{{for i in results:}}
+{{=LI(A(i["title"], _href=URL("administration", "add_movie", vars=dict(tmdbid=i["id"]))))}}
+{{pass}}
+</ul>
+{{pass}}

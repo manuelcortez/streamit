@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{=T.accepted_language or 'en'}}"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge{{=not request.is_local and ',chrome=1' or ''}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{=response.title or request.application}}</title>
+    <meta name="application-name" content="{{=request.application}}">
+</head>
+<body>
+<h1>{{=T("Error {0}".format(code))}}</h1>
+{{=P(message)}}
+</body>
+</html>

@@ -1,0 +1,14 @@
+{{extend 'layout.html'}}
+
+{{block header}}
+    <header class="container-fluid background">
+      <div class="jumbotron text-center">
+      </div>
+    </header>
+
+{{end}}
+<table><caption>{{=T("Files")}}</caption><thead><tr><th>{{=T("Files")}}</th><th>{{=T("Edit")}}</th></tr></thead>
+{{for i in files:}}
+<tr><td>{{=i.file_name}}</td><td>{{=i.id}}</td></tr>
+{{pass}}
+</table>

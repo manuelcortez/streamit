@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+
+{{block header}}
+    <header class="container-fluid background">
+      <div class="jumbotron text-center">
+      </div>
+    </header>
+
+{{end}}
+          {{if response.admin_menu:}}
+  <nav>
+<h2>{{=T("admin menu")}}</h2>
+          {{=MENU(response.admin_menu, _class='nav navbar-nav',li_class='dropdown',ul_class='dropdown-menu')}}
+</nav>
+          {{pass}}
+{{=H2("Estadísticas")}}
+{{=UL(
+LI("Programas de TV: {0}".format(tv_shows,)),
+LI("Películas: {0}".format(movies,)),
+LI("Archivos multimedia en la base de datos: {0}".format(files,)))
+}}
