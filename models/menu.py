@@ -38,5 +38,6 @@ response.menu = [
 
 response.admin_menu = [
     (T('Administration'), False, URL('administration', 'index'), []),
-
+    (T('Add TV Show'), False, URL('administration', 'search_show'), []),
+    (T('Add Movie'), False, URL('administration', 'search_movie'), []),
 ]
