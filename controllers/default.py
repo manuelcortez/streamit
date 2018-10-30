@@ -13,16 +13,15 @@ def index():
 	recent_shows = []
 	recent_show_ids = []
 	recent_episodes = []
-	if auth.user:
-		shows = db(db.tv_show).select()
-		movies = db(db.movie).select()
-		recent_files = db(db.saved_file.user == auth.user).select(limitby=(0, 5), orderby=~db.saved_file.updated_at)
-		for i in recent_files:
-			episode = db(db.tv_episode.file == i.file).select().first()
-			if episode != None and episode.show.id not in recent_show_ids:
-				recent_show_ids.append(episode.show.id)
-				recent_shows.append(db(db.tv_show.id == episode.show).select().first())
-				recent_episodes.append(episode)
+	shows = db(db.tv_show).select()
+	movies = db(db.movie).select()
+	recent_files = db(db.saved_file.user == auth.user).select(limitby=(0, 5), orderby=~db.saved_file.updated_at)
+	for i in recent_files:
+		episode = db(db.tv_episode.file == i.file).select().first()
+		if episode != None and episode.show.id not in recent_show_ids:
+			recent_show_ids.append(episode.show.id)
+			recent_shows.append(db(db.tv_show.id == episode.show).select().first())
+			recent_episodes.append(episode)
 	return dict(message="", share=False, tv_shows=shows, recent_shows=recent_shows, recent_episodes=recent_episodes, movies=movies)
 
 def user():
