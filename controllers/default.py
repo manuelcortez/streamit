@@ -33,6 +33,8 @@ def download():
 	if file == None:
 		raise HTTP(404)
 	filename = file.file
+	if "http" in filename:
+		return redirect(filename)
 	return response.stream(filename)
 
 @auth.requires_login()
