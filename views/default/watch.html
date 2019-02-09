@@ -134,14 +134,16 @@ new InitPxVideo({
 	"captionsOnDefault": false,
 	"seekInterval": 20,
 	"videoTitle": "{{=episode.name if hasattr(episode, "name") else episode.title}}",
-	"debug": true
+	"debug": false
 });
 
+audio = document.getElementsByClassName("px-video-play")[0];
+audio.click();
 audio = document.getElementsByTagName("video")[0];
 {{if progress != None:}}
 audio.currentTime = {{=progress.time}}
 {{pass}}
-audio.play();
+//audio.play();
 audio.addEventListener("ended", function(){
      audio.currentTime = 0;
         window.location.href = "{{=URL("default", "next")}}?type=tv&cap={{=episode.id}}";
@@ -158,7 +160,6 @@ function executeQuery() {
 $(document).ready(function() {
   // run the first time; all subsequent calls will take care of themselves
   setTimeout(executeQuery, 15000);
-
 });
 
 </script>
