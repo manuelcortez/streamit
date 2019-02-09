@@ -70,13 +70,14 @@ def movie():
 
 @auth.requires_login()
 def watch():
-	response.title = T("watch")
 	id = request.vars.id
 	type = request.vars.type
 	if type == "tv":
 		obj = db(db.tv_episode.id == id).select().first()
+		response.title = "{show} - {number}. {name}".format(show=obj.show.show_title, name=obj.name, number=obj.episode_number)
 	elif type == "movie":
 		obj = db(db.movie.id == id).select().first()
+		response.title = obj.title
 	if obj == None:
 		return redirect(URL("default", "index"))
 	existing_file = db((db.saved_file.file == obj.file) & (db.saved_file.type == type) & (db.saved_file.user == auth.user)).select().first()
