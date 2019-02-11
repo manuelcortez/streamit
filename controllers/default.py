@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 """ streamit! A self-hosted netflix."""
 
+def _get_settings():
+	settings = db(db.settings.owner == auth.user).select().first()
+	if settings == None:
+		return redirect(URL("default", "configuration"))
+	return settings
+
 @auth.requires_login()
 def index():
+	settings = _get_settings()
 	response.title = T("Home")
 	# For a logged-in user, displays recently watched shows and movies so continue watching will work.
 	# This will show only the last 5 shows.
@@ -13,8 +20,8 @@ def index():
 	recent_shows = []
 	recent_show_ids = []
 	recent_episodes = []
-	shows = db(db.tv_show).select(orderby=db.tv_show.show_title)
-	movies = db(db.movie).select(orderby=db.movie.title)
+	shows = db(db.tv_show.language == settings.language).select(orderby=db.tv_show.show_title)
+	movies = db(db.movie.language == settings.language).select(orderby=db.movie.title)
 	recent_files = db(db.saved_file.user == auth.user).select(limitby=(0, 5), orderby=~db.saved_file.updated_at)
 	for i in recent_files:
 		episode = db(db.tv_episode.file == i.file).select().first()
@@ -115,3 +122,12 @@ def savedata():
 		db.saved_file.insert(file=file, user=user, type=type, time=progress)
 	else:
 		existing_file.update_record(time=progress, updated_at=request.now)
+
+@auth.requires_login()
+def configuration():
+	response.title = T("Settings")
+	form = SQLFORM(db.settings)
+	if form.process().accepted:
+		response.flash = T("Your settings have been saved successfully")
+		return redirect(URL("default", "index"))
+	return dict(share=False, form=form)

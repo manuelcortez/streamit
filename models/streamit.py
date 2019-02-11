@@ -66,3 +66,7 @@ db.define_table("saved_file",
 	Field("user", "reference auth_user"),
 	Field("time", "double"),
 	Field("updated_at", "datetime", default=request.now))
+
+db.define_table("settings",
+	Field("owner", "reference auth_user", required=True, default=auth.user, readable=False, writable=False),
+	Field("language", "reference languages", label=T("Language for the site (content will be displayed in this language)"), required=True))
