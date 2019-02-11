@@ -33,7 +33,14 @@ response.google_analytics_id = None
 # ----------------------------------------------------------------------------------------------------------------------
 
 response.menu = [
+    (T('Streamit'), False, False, [
     (T('Home'), False, URL('default', 'index'), []),
+]),
+    (T('Profile'), False, False, [
+    (T('Configuration'), False, URL('default', 'configuration'), []),
+    (T('Change password'), False, URL('default', 'user', args="change_password"), []),
+    (T('LogOut'), False, URL('default', 'user', args="logout"), []),
+]),
 ]
 
 response.admin_menu = [

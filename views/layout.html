@@ -62,15 +62,9 @@
           {{=response.logo or ''}}
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            {{='auth' in globals() and auth.navbar('Welcome',mode='dropdown') or ''}}
-          </ul>
-          {{if response.menu:}}
-  <nav>
 <h2>{{=T("Main menu")}}</h2>
           {{=MENU(response.menu, _class='nav navbar-nav',li_class='dropdown',ul_class='dropdown-menu')}}
-</nav>
-          {{pass}}
+
         </div>
       </div>
     </nav>
