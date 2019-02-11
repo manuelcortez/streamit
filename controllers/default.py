@@ -126,7 +126,11 @@ def savedata():
 @auth.requires_login()
 def configuration():
 	response.title = T("Settings")
-	form = SQLFORM(db.settings)
+	settings = db(db.settings.owner == auth.user).select().first()
+	if settings != None:
+		form = SQLFORM(db.settings, settings)
+	else:
+		form = SQLFORM(db.settings)
 	if form.process().accepted:
 		response.flash = T("Your settings have been saved successfully")
 		return redirect(URL("default", "index"))
