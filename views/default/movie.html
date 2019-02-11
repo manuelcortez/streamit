@@ -8,22 +8,22 @@
 
 {{end}}
 {{if show.file != None:}}
-{{=A("reproducir", _href=URL("default", "watch", vars=dict(id=show.id, type="movie")))}}
+{{=A(T("Play"), _href=URL("default", "watch", vars=dict(id=show.id, type="movie")))}}
 {{pass}}
-{{=IMG(_src="http://streamit.manuelcortez.net/static/imgs/{0}".format(show.image,), _alt="Póster de la película")}}
-{{=H2("Ficha técnica")}}
+{{=IMG(_src="http://streamit.manuelcortez.net/static/imgs/{0}".format(show.image,), _alt=T("Movie cover"))}}
+{{=H2(T("Details"))}}
 <ul>
-{{=LI("Nombre: {0}".format(show.title,))}}
-{{=LI("Fecha de emisión: {0}".format(show.release_date,))}}
-{{=LI("Duración: {0}".format(show.run_time,))}}
-{{=LI("Producción: {0}".format(show.created_by,))}}
-{{=LI("Reparto: {0}".format(show.credits,))}}
-{{=LI("Calificación: {0} (basado en {1} votos)".format(show.rating, show.rating_count,))}}
-{{=LI("Géneros: {0}".format(show.genre,))}}
+{{=LI(T("Name: {0}").format(show.title,))}}
+{{=LI(T("Release date: {0}").format(show.release_date,))}}
+{{=LI(T("Lenght: {0}").format(show.run_time,))}}
+{{=LI(T("Production: {0}").format(show.created_by,))}}
+{{=LI(T("Staff: {0}").format(show.credits,))}}
+{{=LI(T("Rate: {0} (based in {1} votes)").format(show.rating, show.rating_count,))}}
+{{=LI(T("Genres: {0}").format(show.genre,))}}
 </ul>
 <blockquote>
 {{=show.overview}}
 </blockquote>
 {{if auth.user_id == 1:}}
-{{=A("Add file", _href=URL("administrator", "add_file", vars=dict(type="movie", id=show.id)))}} | {{=A("Add file from server path", _href=URL("admin", "add_file", vars=dict(type="movie", id=show.id)))}}
+{{=A(T("Add file"), _href=URL("administrator", "add_file", vars=dict(type="movie", id=show.id)))}} | {{=A("Add file from server path", _href=URL("admin", "add_file", vars=dict(type="movie", id=show.id)))}}
 {{pass}}
