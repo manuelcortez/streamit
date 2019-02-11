@@ -8,20 +8,20 @@
 
 {{end}}
 {{if auth.user_id == 1:}}
-{{=A("Añadir temporada", _href=URL("administration", "add_season", vars=dict(show=show.id)))}}
+{{=A(T("Add season"), _href=URL("administration", "add_season", vars=dict(show=show.id)))}}
 {{pass}}
-{{=IMG(_src="http://flix.mcc-technologies.com/static/imgs/{0}".format(show.image,), _alt="Póster del show")}}
-{{=H2("Ficha técnica")}}
+{{=IMG(_src="http://streamit.manuelcortez.net/static/imgs/{0}".format(show.image,), _alt=T("Show cover"))}}
+{{=H2(T("Details"))}}
 <ul>
-{{=LI("Nombre: {0}".format(show.show_title,))}}
-{{=LI("Primera emisión: {0}".format(show.release_date,))}}
-{{=LI("Temporadas: {0}".format(show.number_of_seasons,))}}
-{{=LI("Número de episodios: {0}".format(show.number_of_episodes,))}}
-{{=LI("Duración por episodio: {0}".format(show.episode_run_time,))}}
-{{=LI("Creador: {0}".format(show.created_by,))}}
-{{=LI("Reparto: {0}".format(show.credits,))}}
-{{=LI("Calificación: {0} (basado en {1} votos)".format(show.rating, show.rating_count,))}}
-{{=LI("Géneros: {0}".format(show.genre,))}}
+{{=LI(T("Name: {0}").format(show.show_title,))}}
+{{=LI(T("First aired: {0}").format(show.release_date,))}}
+{{=LI(T("Seasons: {0}").format(show.number_of_seasons,))}}
+{{=LI(T("Episodes: {0}").format(show.number_of_episodes,))}}
+{{=LI(T("Run time: {0}").format(show.episode_run_time,))}}
+{{=LI(T("Creators: {0}").format(show.created_by,))}}
+{{=LI(T("Staff: {0}").format(show.credits,))}}
+{{=LI(T("Rating: {0} (based in {1} votes)").format(show.rating, show.rating_count,))}}
+{{=LI(T("Genres: {0}").format(show.genre,))}}
 </ul>
 <blockquote>
 {{=show.overview}}

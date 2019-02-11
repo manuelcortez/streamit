@@ -25,5 +25,5 @@
 {{=show.overview}}
 </blockquote>
 {{if auth.user_id == 1:}}
-{{=A(T("Add file"), _href=URL("administrator", "add_file", vars=dict(type="movie", id=show.id)))}} | {{=A("Add file from server path", _href=URL("admin", "add_file", vars=dict(type="movie", id=show.id)))}}
+{{=A(T("Add file"), _href=URL("administration", "add_file", vars=dict(type="movie", id=show.id)))}}
 {{pass}}

@@ -8,12 +8,12 @@
 
 {{end}}
 {{if auth.user_id == 1:}}
-{{=A("Editar temporada", _href=URL("edit", "edit_season", vars=dict(season=season.id)))}}
+{{=A(T("Edit season"), _href=URL("edit", "edit_season", vars=dict(season=season.id)))}}
 {{pass}}
-{{=IMG(_src="http://streamit.manuelcortez.net/static/imgs/{0}".format(season.image,), _alt="Póster de la temporada")}}
+{{=IMG(_src="http://streamit.manuelcortez.net/static/imgs/{0}".format(season.image,), _alt=T("Season cover"))}}
 <ul>
-{{=LI("Primera emisión: {0}".format(season.first_aired,))}}
-{{=LI("Número de episodios: {0}".format(len(episodes),))}}
+{{=LI(T("First aired: {0}").format(season.first_aired,))}}
+{{=LI(T("episodes: {0}").format(len(episodes),))}}
 </ul>
 <blockquote>
 {{=season.overview}}
@@ -27,7 +27,7 @@
 {{=LI("{0}. {1}".format(i.episode_number, i.name))}}
 {{pass}}
 {{if auth.user_id == 1:}}
-{{=A("Add file from server path", _href=URL("administration", "add_file", vars=dict(type="tv", id=i.id)))}}
+{{=A(T("Add file"), _href=URL("administration", "add_file", vars=dict(type="tv", id=i.id)))}}
 {{pass}}
 {{pass}}
 </ul>
