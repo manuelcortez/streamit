@@ -154,10 +154,11 @@ def add_file():
 def search_movie():
 	results = []
 	response.title = T("Search Movie")
-	form = SQLFORM.factory(Field("search", "string"))
+	form = SQLFORM.factory(Field("search", "string"), Field("language", "reference languages", required=True, requires=IS_IN_DB(db, db.languages.code)))
 	if form.validate():
 		search = tmdb.Search()
-		r = search.movie(query=form.vars.search, language="es")
+		session.language_for_search = form.vars.language
+		r = search.movie(query=form.vars.search, language=form.vars.language)
 		results = search.results
 	return dict(share=False, form=form, results=results)
 
@@ -168,7 +169,7 @@ def add_movie():
 	movie = None
 	if request.vars.tmdbid != None:
 		movie_es = tmdb.Movies(request.vars.tmdbid)
-		r = movie_es.info(language="es")
+		r = movie_es.info(language=session.language_for_search)
 		movie = tmdb.Movies(request.vars.tmdbid)
 		r = movie.info()
 		credits = movie.credits()["cast"]
