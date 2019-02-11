@@ -13,8 +13,8 @@ def index():
 	recent_shows = []
 	recent_show_ids = []
 	recent_episodes = []
-	shows = db(db.tv_show).select()
-	movies = db(db.movie).select()
+	shows = db(db.tv_show).select(orderby=db.tv_show.show_title)
+	movies = db(db.movie).select(orderby=db.movie.title)
 	recent_files = db(db.saved_file.user == auth.user).select(limitby=(0, 5), orderby=~db.saved_file.updated_at)
 	for i in recent_files:
 		episode = db(db.tv_episode.file == i.file).select().first()
