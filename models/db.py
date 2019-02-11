@@ -109,7 +109,8 @@ auth.settings.reset_password_requires_verification = True
 db.define_table("languages",
 Field("name", "string", required=True, label=T("Language name, in English")),
 Field("locale_name", "string", label=T("Language translated name")),
-Field("code", "string", required=True, label=T("Two letter code for the language"))
+Field("code", "string", required=True, label=T("Two letter code for the language")),
+format="%(locale_name)s"
 )
 
 # Add some languages in case there are no available languages in db.

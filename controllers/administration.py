@@ -36,7 +36,7 @@ def index():
 def search_show():
 	results = []
 	response.title = T("Search TV show")
-	form = SQLFORM.factory(Field("search", "string"), Field("language", "reference languages", default="es", requires=IS_IN_DB(db, db.languages.code), required=True))
+	form = SQLFORM.factory(Field("search", "string"), Field("language", "reference languages", required=True, requires=IS_IN_DB(db, db.languages.code)))
 	if form.validate():
 		search = tmdb.Search()
 		session.language_for_search = form.vars.language
@@ -112,7 +112,7 @@ def add_season():
 		season_en = tmdb.TV_Seasons(show.movie_db_id, season_number=form.vars.season)
 		info_en = season_en.info()
 		season_es = tmdb.TV_Seasons(show.movie_db_id, season_number=form.vars.season)
-		info_es = season_es.info(language="es")
+		info_es = season_es.info(language=show.language.code)
 		for i in range(0, len(info_es["episodes"])):
 			for z in info_es["episodes"][i].keys():
 				if type(info_es["episodes"][i][z]) == str and len(info_es["episodes"][i][z]) == 0: info_es["episodes"][i][z] = info_en["episodes"][i][z]
